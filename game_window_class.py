@@ -1,5 +1,6 @@
 import pygame
 import copy
+import random
 from cell_class import *
 vec = pygame.math.Vector2
 
@@ -58,3 +59,12 @@ class Game_window:
                         new_grid[yindex][xindex].alive = True
                         
         self.grid = new_grid
+
+    def randomize(self):
+        self.grid = [[Cell(self.image, x, y) for x in range(self.cols)] for y in range(self.rows)]
+        for row in self.grid:
+            for cell in row:
+                cell.alive = random.choice([True, False])
+        for row in self.grid:
+            for cell in row:
+                cell.get_neighbors(self.grid)
